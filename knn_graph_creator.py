@@ -38,3 +38,7 @@ def create_graph(csv_file, output_pickle, k=5):
 
     print((G))
     return G
+if __name__ == "__main__":
+    csv_file = 'cleaned_parking_violations.csv'
+    output_pickle = 'parking_violations_graph.pickle'
+    create_graph(csv_file, output_pickle)
