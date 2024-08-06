@@ -21,3 +21,20 @@ def create_graph(csv_file, output_pickle, k=5):
 
     # Create the graph
     G = nx.Graph()
+    
+    for i, (distances_row, indices_row) in enumerate(tqdm(zip(distances, indices), total=len(df), desc="Creating graph")):
+        ticket_number = df.iloc[i]['TICKET_NUMBER']
+        lat, lon = coords[i]
+        G.add_node(ticket_number, pos=(lat, lon), fine_amount=df.iloc[i]['FINE_AMOUNT'])
+        
+        for j, distance in zip(indices_row[1:], distances_row[1:]):  
+            if distance <= 500:  # only for up to 500 meters
+                neighbor_ticket = df.iloc[j]['TICKET_NUMBER']
+                G.add_edge(ticket_number, neighbor_ticket, weight=distance)
+
+    # save the grpah as a pikle file for faster 
+    with open(output_pickle, 'wb') as f:
+        pickle.dump(G, f)
+
+    print((G))
+    return G
