@@ -65,6 +65,7 @@ def dijkstra_violations(start_node, max_distance=500):
                 distances[neighbor] = distance
                 pq.append((distance, neighbor))
 
+<<<<<<< HEAD
     return violations
 
 def create_map(lat, lon, violations):
@@ -130,3 +131,6 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
+=======
+    return violations
+>>>>>>> f222479958c04262376498bc69b8f5bcf24f3806
